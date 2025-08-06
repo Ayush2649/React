@@ -1,21 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-const parent = React.createElement(
-  "div",
-  { id: "parent" },
-  [React.createElement("div", { id: "child", key: "child1" }, 
-    React.createElement("h1", {}, "Hi, I'm Ayush"),
-    React.createElement("h2", {}, "Hi, I'm an h2 tag"),
-  ), 
-    React.createElement("div", { id: "child2", key: "child2" }, 
-    React.createElement("h1", {}, "Hi, I'm an h1 tag"),
-    React.createElement("h2", {}, "Hi, I'm an h2 tag"),
-  )]
-);
+// React.createElement => object => render (html element)
 
-console.log(parent);
+// JSX is different, React is different
+// JSX is not HTML inside JS, It may be HTML like syntax but it is not HTML
+
+const JSXHeading = (
+  <h1 className="root" tabIndex={1}>
+    Namaste React using JSX 🚀
+  </h1>
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(parent);
+root.render(JSXHeading);
+// console.log(JSXHeading);
