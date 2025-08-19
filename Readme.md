@@ -1,5 +1,8 @@
 # Namaste React 🚀
 
+- Why React is so fast??
+    - It makes the DOM Operations very fast
+
 # Parcel 📦
 - Dev Build
 - Server
@@ -49,3 +52,20 @@
 2. Named Import / Export
     - Export const Component
     - Import {Component} from (file location)
+
+# React Hooks
+They are normal JS utility functions
+There are two important Hooks
+- useState() : Superpowerful State Variables in React
+- useEffect()
+
+- Whenever a State Variable updates, React rerenders the component  
+
+# Reconciliation Algorithm (React Fiber)
+Virtual DOM is representaion of Actual DOM
+
+# Diff Algorithm
+- It just finds out the differnece between the Virtual DOMs
+
+                     (Clicks on button)
+Root with seven nodes       =>         Root with 3 nodes
