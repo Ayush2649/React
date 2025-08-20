@@ -2,6 +2,7 @@
 
 - Why React is so fast??
     - It makes the DOM Operations very fast
+    - It has one of the best rendering mechanisms
 
 # Parcel 📦
 - Dev Build
