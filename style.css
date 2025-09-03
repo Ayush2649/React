@@ -9,6 +9,7 @@
 .logo{
     width: 100px;
     height: auto;
+    object-fit: cover;
 }
 
 .nav-items{
@@ -59,7 +60,7 @@
 }
 
 .filter-btn{
-    margin: 10px;
+    margin-left: 20px;
     cursor: pointer;
 }
 
@@ -87,4 +88,8 @@
     cursor: pointer;
     font-size: 16px;
     padding: 10px 20px;
+}
+
+.filter{
+    display: flex;
 }

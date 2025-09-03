@@ -70,3 +70,10 @@ Virtual DOM is representaion of Actual DOM
 
                      (Clicks on button)
 Root with seven nodes       =>         Root with 3 nodes
+
+- Whenever State Variable updates, React triggers a Reconciliation cycle(rerenders the component)
+
+- Everytime the component is rendered, useEffect will be called
+    - if no dependency array => useEffect is called on every render
+    - if dependency array is empty = [] => useEffect is called on initial render only
+    - if dependency array is [btnContent] => useEffect is called whenever the [btnContent] is updated
