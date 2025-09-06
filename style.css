@@ -93,3 +93,8 @@
 .filter{
     display: flex;
 }
+
+.no-link {
+    text-decoration: none;
+    color: inherit;
+}
