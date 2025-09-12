@@ -101,3 +101,8 @@ Virtual DOM is representaion of Actual DOM
         - Every time you click a link, the browser sends a request to the server.
         - The server responds with a new HTML document for that route.
         - This causes a full page reload with all resources reloaded (unless cached).
+
+# Two Types of Component: 
+  - Functional Component: It is nothing but a normal JS function which returns some piece of JSX
+
+  - Class-Based Component: It is nothing but a normal JS class which contains a render method which returns some piece of JSX

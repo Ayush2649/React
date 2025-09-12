@@ -98,3 +98,9 @@
     text-decoration: none;
     color: inherit;
 }
+
+.user-card{
+    margin: 10px 0;
+    border: 1px solid black;
+    padding: 10px;
+}
