@@ -106,3 +106,11 @@ Virtual DOM is representaion of Actual DOM
   - Functional Component: It is nothing but a normal JS function which returns some piece of JSX
 
   - Class-Based Component: It is nothing but a normal JS class which contains a render method which returns some piece of JSX
+
+# Single Responsibility Principle (SRP)
+  - Each and every component should have a single responsiblity. E.g.(Header.js should just show header, RestaurantMenu.js hsould just show RestaurantMenu)
+
+  - This make the code more 
+    - maintainable
+    - resusable
+    - testable
