@@ -1,6 +1,7 @@
-import { LOGO_URL } from "../utils/constants";
+// src/components/Header.js
+import { LOGO_URL } from "../utils/constants.js";
 import { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Header = () => {
@@ -12,25 +13,25 @@ const Header = () => {
   }, [btnContent]);
 
   return (
-    <div className="header">
-      <div className="logo-container">
-        <img className="logo" src={LOGO_URL} alt="Logo" />
+    <div className="flex justify-between bg-[#FF4C29] text-white shadow-lg px-6 py-3">
+      {/* Logo Section */}
+      <div className="logo-container flex items-center">
+        <img className="w-25" src={LOGO_URL} alt="YumRush Logo" />
       </div>
-      <div className="nav-items">
-        <ul>
+
+      {/* Nav Section */}
+      <div className="flex items-center">
+        <ul className="flex p-4 m-4 text-lg space-x-6">
           <li>Online Status: {onlineStatus ? "✅" : "🔴"}</li>
-          <li><Link to={"/"} className="no-link">Home</Link></li>
-          <li><Link to={"/about"} className="no-link">About Us</Link></li>
-          <li><Link to={"/contact"} className="no-link">Contact Us</Link></li>
-          <li><Link to={"/grocery"} className="no-link">Grocery</Link></li>
-          {/* <li>Cart</li> */}
+          <li><Link to="/" className="no-link">Home</Link></li>
+          <li><Link to="/about" className="no-link">About Us</Link></li>
+          <li><Link to="/contact" className="no-link">Contact Us</Link></li>
+          <li><Link to="/grocery" className="no-link">Grocery</Link></li>
           <button
-            className="login"
-            onClick={() => {
-              btnContent === "Login"
-                ? setBtnContent("Logout")
-                : setBtnContent("Login");
-            }}
+            className="login bg-[#FBE3D5] text-[#FF4C29] px-3 py-1 rounded-md font-semibold hover:bg-[#FF4C29] transform transition duration-300 hover:scale-105 hover:text-white"
+            onClick={() =>
+              setBtnContent((prev) => (prev === "Login" ? "Logout" : "Login"))
+            }
           >
             {btnContent}
           </button>
