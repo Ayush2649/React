@@ -10,7 +10,7 @@ const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  console.log("Body render");
+  console.log("Body render", listOfRestaurants);
 
   useEffect(() => {
     fetchData();
@@ -18,11 +18,11 @@ const Body = () => {
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.2004765&lng=72.8736892&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      "http://localhost:5000/api/restaurant-list?lat=19.2004765&lng=72.8736892"
     );
 
     const json = await data.json();
-    console.log("API JSON:", json);
+    // console.log("API JSON:", json);
 
     // Find the card which actually has restaurants
     const restaurants =
@@ -36,8 +36,13 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  if(onlineStatus === false) {
-    return <h1>🔴 Looks like something went wrong!! Please check your internet connection.</h1>
+  if (onlineStatus === false) {
+    return (
+      <h1>
+        🔴 Looks like something went wrong!! Please check your internet
+        connection.
+      </h1>
+    );
   }
 
   return !listOfRestaurants || listOfRestaurants.length === 0 ? (
@@ -75,17 +80,17 @@ const Body = () => {
           </button>
         </div>
         <div className="m-4 p-4">
-          <button 
-          className="filter-btn flex px-4 py-1.5 bg-[#FBE3D5] rounded-lg hover:bg-[#FF4C29] transform transition duration-300 hover:scale-105 hover:text-white"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => parseFloat(res.info.avgRating) > 4
-            );
-            setFilteredRestaurants(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+          <button
+            className="filter-btn flex px-4 py-1.5 bg-[#FBE3D5] rounded-lg hover:bg-[#FF4C29] transform transition duration-300 hover:scale-105 hover:text-white"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter(
+                (res) => parseFloat(res.info.avgRating) > 4
+              );
+              setFilteredRestaurants(filteredList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
         </div>
       </div>
       <div className="flex flex-wrap justify-between">

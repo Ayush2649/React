@@ -5,7 +5,7 @@ const useRestaurantMenu = (resId) => {
   const [data, setData] = useState({
     name: "",
     address: "",
-    dishes: [],
+    sections: [],
     isLoading: true,
     error: null,
   });
@@ -13,35 +13,89 @@ const useRestaurantMenu = (resId) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(FETCH_MENU_URL + resId);
-        const json = await res.json();
+        const response = await fetch(FETCH_MENU_URL + resId);
+        console.log("Fetching:", FETCH_MENU_URL + resId);
+
+        // ✅ Check for HTTP and content type before parsing
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const text = await response.text();
+
+        // ✅ Ensure it's JSON
+        if (!text || text.trim().length === 0) {
+          throw new Error("Empty response body");
+        }
+        if (!text.startsWith("{")) {
+          throw new Error("Response is not JSON (maybe HTML)");
+        }
+
+        const json = JSON.parse(text);
+        console.log("Fetched JSON:", json);
 
         const cards = json?.data?.cards || [];
 
-        // restaurant name & address
         const name =
           cards?.[0]?.card?.card?.text ||
           cards?.[2]?.card?.card?.info?.name ||
           "Not Found";
 
         const info = cards?.[2]?.card?.card?.info;
-        const address = info ? `${info.locality ?? ""}, ${info.areaName ?? ""}` : "";
+        const address = info
+          ? `${info.locality ?? ""}, ${info.areaName ?? ""}`
+          : "";
 
-        // dishes
         const menuCards =
-          cards?.find((c) => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
+          cards?.find((c) => c.groupedCard)?.groupedCard?.cardGroupMap?.REGULAR
+            ?.cards || [];
 
-        const dishes = [];
+        console.log("menuCards:", menuCards);
+
+        const sections = [];
+
         menuCards.forEach((c) => {
-          const items = c?.card?.card?.itemCards;
-          if (items) {
-            items.forEach((i) => dishes.push(i.card.info));
+          const section = c?.card?.card;
+          if (!section?.title) return;
+
+          if (section["@type"]?.includes("ItemCategory") && section.itemCards) {
+            sections.push({
+              title: section.title,
+              subSections: [
+                {
+                  title: null,
+                  items: section.itemCards.map((i) => i.card.info),
+                },
+              ],
+            });
+          } else if (
+            section["@type"]?.includes("NestedItemCategory") &&
+            section.categories
+          ) {
+            const subSections = section.categories.map((cat) => ({
+              title: cat.title,
+              items: (cat.itemCards || []).map((i) => i.card.info),
+            }));
+
+            sections.push({
+              title: section.title,
+              subSections,
+            });
           }
         });
 
-        setData({ name, address, dishes, isLoading: false, error: null });
+        console.log("Sections extracted:", sections);
+
+        setData({ name, address, sections, isLoading: false, error: null });
       } catch (err) {
-        setData({ name: "", address: "", dishes: [], isLoading: false, error: err });
+        console.error("Error fetching menu:", err);
+        setData({
+          name: "",
+          address: "",
+          sections: [],
+          isLoading: false,
+          error: err,
+        });
       }
     };
 

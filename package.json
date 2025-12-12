@@ -27,6 +27,10 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.13",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "lucide-react": "^0.544.0",
+    "node-fetch": "^2.7.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router-dom": "^6.22.3",
